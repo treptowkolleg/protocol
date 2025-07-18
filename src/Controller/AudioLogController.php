@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\AudioLog;
 use App\Repository\AudioLogRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,6 +21,23 @@ class AudioLogController extends AbstractController
         return $this->render("audio_log_list.html.twig",[
             'logs' => $audioLogs
         ]);
+    }
+
+    #[Route('create', name: 'create')]
+    public function create(EntityManagerInterface $entityManager)
+    {
+        $audioLog = new AudioLog();
+        $audioLog->setSessionNumber(1);
+        $audioLog->setPartNumber(2);
+        $audioLog->setSpeaker('Ben');
+        $audioLog->setSubject('Testaufnahme');
+        $audioLog->setTransript('Ich bin der Ben und mache eine Testaufnahme');
+        $audioLog->setSummary("Ben testet die Aufnahmefunktion");
+
+        $entityManager->persist($audioLog);
+        $entityManager->flush();
+
+        return new Response('OK');
     }
 
 }

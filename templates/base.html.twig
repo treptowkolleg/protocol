@@ -18,7 +18,7 @@
             <div class="container-fluid py-3">
                 <div class="row row-cols-1 g-3">
                     <div class="col">
-                        <div class="card">
+                        <div class="">
                             <div class="d-flex justify-content-evenly">
                                 <a href="#" class="btn btn-success w-100">Aktualisieren</a>
                                 <a href="#" class="btn btn-primary w-100">Bibliothek</a>
@@ -28,10 +28,13 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-header">
-                                <div class="card-title h5">Protokoll vom 23.06.2025</div>
+                                <div class="card-title h5">Alle Sessions</div>
                             </div>
-                            <div hx-get="{{ url('audio_log_index') }}" hx-target="#results" hx-trigger="load every 30s"></div>
-                            <div id="results"></div>
+                            <div hx-get="{{ url('audio_log_index') }}" hx-swap="innerHTML" hx-trigger="load every 30s">
+                                <div class="list-group list-group-flush">
+                                    <div class="list-group-item small">Daten werden geladen ...</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

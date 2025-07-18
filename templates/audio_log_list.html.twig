@@ -2,17 +2,17 @@
     {% for log in logs %}
         <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-start align-items-center">
-                <div class="fs-4">{{ log.sessionNumber }}</div>
+                <div class="fs-4 pe-3">{{ log.sessionNumber }}</div>
                 <div>
                     <div class="fw-bold">{{ log.subject }}</div>
-                    <div>{{ log.partNumber }}</div>
+                    <div>Part {{ log.partNumber }}</div>
                 </div>
             </div>
-            <div>{{ log.created|date('d.m.Y') }}</div>
+            <div>{{ log.createdAt|date('d.m.Y') }}</div>
         </a>
     {% else %}
-    <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    <div class="list-group-item d-flex justify-content-between align-items-center">
         <small>Keine Audio-Logs vorhanden</small>
-    </a>
+    </div>
     {% endfor %}
 </div>

@@ -6,6 +6,7 @@
         "@symfony/webpack-encore": "^5.0.0",
         "bootstrap": "^5.3.7",
         "core-js": "^3.38.0",
+        "htmx.org": "^2.0.6",
         "regenerator-runtime": "^0.13.9",
         "sass": "^1.89.2",
         "sass-loader": "^16.0.1",

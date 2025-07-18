@@ -6,11 +6,10 @@
  */
 import './styles/app.scss';
 
-
 // this "modifies" the jquery module: adding behavior to it
 // the bootstrap module doesn't export/return anything
 require('bootstrap');
-
+window.htmx = require('htmx.org');
 // or you can include specific pieces
 // require('bootstrap/js/dist/tooltip');
 // require('bootstrap/js/dist/popover');

@@ -30,12 +30,8 @@
                             <div class="card-header">
                                 <div class="card-title h5">Protokoll vom 23.06.2025</div>
                             </div>
-                            <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item list-group-item-action">1</a>
-                                <a href="#" class="list-group-item list-group-item-action">2</a>
-                                <a href="#" class="list-group-item list-group-item-action">3</a>
-                                <a href="#" class="list-group-item list-group-item-action">4</a>
-                            </div>
+                            <div hx-get="{{ url('audio_log_index') }}" hx-target="#results" hx-trigger="load every 30s"></div>
+                            <div id="results"></div>
                         </div>
                     </div>
                 </div>

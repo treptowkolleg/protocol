@@ -1870,6 +1870,11 @@ htmlparser2@^6.1.0:
     domutils "^2.5.2"
     entities "^2.0.0"
 
+htmx.org@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/htmx.org/-/htmx.org-2.0.6.tgz#42573483c72112e7e332dfe93043cd0eb32cda01"
+  integrity sha512-7ythjYneGSk3yCHgtCnQeaoF+D+o7U2LF37WU3O0JYv3gTZSicdEFiI/Ai/NJyC5ZpYJWMpUb11OC5Lr6AfAqA==
+
 icss-utils@^5.0.0, icss-utils@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/icss-utils/-/icss-utils-5.1.0.tgz#c6be6858abd013d768e98366ae47e25d5887b1ae"

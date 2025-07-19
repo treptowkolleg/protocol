@@ -36,5 +36,5 @@ class AudioLogController extends AbstractController
             'log' => $audioLog,
         ]);
     }
-    
+
 }

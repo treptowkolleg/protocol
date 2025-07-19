@@ -10,7 +10,7 @@
         <meta name="apple-mobile-web-app-title" content="Alumni" />
         <link rel="manifest" href="/site.webmanifest" />
         <title>{% block title %}Audio-to-Text-Summarizer (AtTS){% endblock %}</title>
-        
+
         {% block stylesheets %}
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
             {{ encore_entry_link_tags('app') }}
@@ -41,8 +41,8 @@
                 </div>
             </div>
 
-            <div class="container-fluid py-3">
-                <div class="row row-cols-1 g-3">
+            <div class="py-3">
+                <div class="">
                     <div class="col">
                         <div class="">
 
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="card">
+                        <div class="card rounded-0 border-start-0 border-end-0">
                             <div class="card-header"></div>
                             <div id="logs" hx-get="{{ path('audio_log_index') }}" hx-swap="innerHTML" hx-trigger="load every 30s">
                                 <div class="list-group list-group-flush">

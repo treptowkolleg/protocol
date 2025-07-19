@@ -20,7 +20,7 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body class="bg-secondary" style="padding-top: 120px">
+    <body class="bg-light" style="padding-top: 120px">
         {% block body %}
             <div class="modal fade" id="log-detail" tabindex="-1" aria-labelledby="log-detail-title" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-scrollable">
@@ -46,29 +46,22 @@
                     <div class="col">
                         <div class="">
 
-                            <div class="row row-cols-4 g-3 mb-3 fixed-top p-3 bg-primary-subtle border-primary border-bottom shadow">
-                                <div class="col">
-                                    <button
-                                        hx-get="{{ path('audio_log_index') }}"
-                                        hx-target="#logs"
-                                        hx-include="[name='date']"
-                                        class="d-flex justify-content-center align-items-center btn btn-primary w-100"
-                                    >
-                                        <i class="ti ti-refresh me-2"></i>Aktualisieren
-                                    </button>
+                            <div class="row align-items-end row-cols-4 g-3 mb-3 fixed-top p-3 bg-primary-subtle border-primary border-bottom shadow">
+                                <div class="col-12">
+                                    <h1 class="h4 mb-0"><i class="ti ti-device-audio-tape text-success me-2"></i>Audio-Protokoll-Monitor</h1>
                                 </div>
-
-                                <div class="col"></div>
-                                <div class="col"></div>
-                                <div class="col"></div>
-
                                 <div class="col">
+                                    <label class="form-label" for="date-select">
+                                        <i class="ti ti-filter"></i>
+                                        Datum filtern
+                                    </label>
                                     <select
                                         hx-get="{{ path('audio_log_index') }}"
                                         hx-target="#logs"
                                         hx-trigger="change"
+                                        hx-include="[name='property'], [name='asc']"
                                         class="form-select"
-                                        aria-label="Default select example"
+                                        aria-label="Datum"
                                         name="date"
                                         id="date-select"
                                     >
@@ -79,6 +72,62 @@
                                         {% endfor %}
                                     </select>
                                 </div>
+
+                                <div class="col">
+                                    <label class="form-label" for="property-select">
+                                        <i class="ti ti-category"></i>
+                                        Sortieren nach
+                                    </label>
+                                    <select
+                                        hx-get="{{ path('audio_log_index') }}"
+                                        hx-target="#logs"
+                                        hx-trigger="change"
+                                        hx-include="[name='date'], [name='asc']"
+                                        class="form-select"
+                                        aria-label="Eigenschaft"
+                                        name="property"
+                                        id="property-select"
+                                    >
+                                        <option value="createdAt" selected>Datum</option>
+                                        <option value="partNumber">Part</option>
+                                        <option value="sessionNumber">Session</option>
+                                        <option value="speaker">Sprecher</option>
+                                        <option value="subject">Titel</option>
+                                    </select>
+                                </div>
+
+                                <div class="col">
+                                    <label class="form-label" for="asc-select">
+                                        <i class="ti ti-arrows-sort"></i>
+                                        Sortierrichtung
+                                    </label>
+                                    <select
+                                        hx-get="{{ path('audio_log_index') }}"
+                                        hx-target="#logs"
+                                        hx-trigger="change"
+                                        hx-include="[name='date'], [name='property']"
+                                        class="form-select"
+                                        aria-label="Sortierung"
+                                        name="asc"
+                                        id="asc-select"
+                                    >
+                                        <option value="0" selected>abwärts</option>
+                                        <option value="1">aufwärts</option>
+                                    </select>
+                                </div>
+
+                                <div class="col">
+                                    <button
+                                        style="height: 38px"
+                                        hx-get="{{ path('audio_log_index') }}"
+                                        hx-target="#logs"
+                                        hx-include="[name='date'], [name='asc']"
+                                        class="d-flex justify-content-center align-items-center btn btn-primary w-100"
+                                    >
+                                        <i class="ti ti-refresh me-2"></i>Aktualisieren
+                                    </button>
+                                </div>
+
                             </div>
                         </div>
                     </div>

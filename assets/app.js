@@ -1,16 +1,7 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * This file will be included onto the page via the importmap() Twig function,
- * which should already be in your base.html.twig.
- */
 import './styles/app.scss';
 
-// this "modifies" the jquery module: adding behavior to it
-// the bootstrap module doesn't export/return anything
-require('bootstrap');
-window.htmx = require('htmx.org');
-// or you can include specific pieces
-// require('bootstrap/js/dist/tooltip');
-// require('bootstrap/js/dist/popover');
+import 'htmx.org';
+import * as mdb from 'mdb-ui-kit'; // lib
+window.mdb = mdb;
 
+require('bootstrap');

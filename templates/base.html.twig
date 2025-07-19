@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="de" data-bs-theme="dark">
+<html lang="de" data-bs-theme="light" class="h-100">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Audio-to-Text-Summarizer (AtTS){% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css">
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
@@ -13,32 +14,86 @@
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
-    <body>
+    <body class="bg-secondary" style="padding-top: 120px">
         {% block body %}
+            <div class="modal fade" id="log-detail" tabindex="-1" aria-labelledby="log-detail-title" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                    <div class="modal-content" id="log-detail-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="log-detail-title">Daten werden geladen ...</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center" id="log-detail-body">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Daten werden geladen ...</span>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Schließen</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="container-fluid py-3">
                 <div class="row row-cols-1 g-3">
                     <div class="col">
                         <div class="">
-                            <div class="d-flex justify-content-evenly">
-                                <a href="#" class="btn btn-success w-100">Aktualisieren</a>
-                                <a href="#" class="btn btn-primary w-100">Bibliothek</a>
+
+                            <div class="row row-cols-4 g-3 mb-3 fixed-top p-3 bg-primary-subtle border-primary border-bottom shadow">
+                                <div class="col">
+                                    <button
+                                        hx-get="{{ path('audio_log_index') }}"
+                                        hx-target="#logs"
+                                        hx-include="[name='date']"
+                                        class="d-flex justify-content-center align-items-center btn btn-primary w-100"
+                                    >
+                                        <i class="ti ti-refresh me-2"></i>Aktualisieren
+                                    </button>
+                                </div>
+
+                                <div class="col"></div>
+                                <div class="col"></div>
+                                <div class="col"></div>
+
+                                <div class="col">
+                                    <select
+                                        hx-get="{{ path('audio_log_index') }}"
+                                        hx-target="#logs"
+                                        hx-trigger="change"
+                                        class="form-select"
+                                        aria-label="Default select example"
+                                        name="date"
+                                        id="date-select"
+                                    >
+                                        <option value="all" selected>alle Daten</option>
+                                        <option value="{{ "now"|date('Y-m-d') }}">heute</option>
+                                        {% for value in dates %}
+                                            <option value="{{ value.created_at|slice(0,10) }}">{{ value.day|date('d.m.Y') }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col">
                         <div class="card">
-                            <div class="card-header">
-                                <div class="card-title h5">Alle Sessions</div>
-                            </div>
-                            <div hx-get="{{ url('audio_log_index') }}" hx-swap="innerHTML" hx-trigger="load every 30s">
+                            <div class="card-header"></div>
+                            <div id="logs" hx-get="{{ path('audio_log_index') }}" hx-swap="innerHTML" hx-trigger="load every 30s">
                                 <div class="list-group list-group-flush">
                                     <div class="list-group-item small">Daten werden geladen ...</div>
                                 </div>
                             </div>
+                            <div class="card-footer"></div>
                         </div>
                     </div>
                 </div>
             </div>
         {% endblock %}
+    <footer>
+        <div class="container-fluid">
+            <small>&copy; 2025 - Benjamin Wagner</small>
+        </div>
+    </footer>
     </body>
 </html>

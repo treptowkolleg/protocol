@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\AudioLogRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -11,9 +12,12 @@ class AppController extends AbstractController
 {
 
     #[Route('/', name: 'index')]
-    public function index(): Response
+    public function index(AudioLogRepository $repository): Response
     {
-        return $this->render("base.html.twig",[]);
+        $dates = $repository->findDates();
+        return $this->render("base.html.twig",[
+            'dates' => $dates,
+        ]);
     }
 
 }
